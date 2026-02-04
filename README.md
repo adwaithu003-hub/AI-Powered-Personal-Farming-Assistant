@@ -1,12 +1,10 @@
 🌱 AI-Powered Personal Farming Assistant
 📌 Project Overview
 
-The AI-Powered Personal Farming Assistant is a web-based application designed to help farmers and gardeners make smart, data-driven agricultural decisions. The platform uses Artificial Intelligence and Machine Learning to provide solutions such as plant disease detection, soil analysis, seed identification, weather alerts, and farming schedule reminders — all in one place.
+**The AI-Powered Personal Farming Assistant is a web-based application designed to help farmers and gardeners make smart, data-driven agricultural decisions. The platform uses Artificial Intelligence and Machine Learning to provide solutions such as plant disease detection, soil analysis, seed identification, weather alerts, and farming schedule reminders — all in one place.**
 
 🎯 Problem Statement
-
-Farmers often face challenges such as crop diseases, incorrect crop selection, unpredictable weather, and lack of timely expert guidance. Existing solutions are fragmented, generic, and not personalized. This project aims to reduce guesswork and crop loss by providing instant, personalized, and AI-driven farming assistance.
-
+**Farmers often face challenges such as crop diseases, incorrect crop selection, unpredictable weather, and lack of timely expert guidance. Existing solutions are fragmented, generic, and not personalized. This project aims to reduce guesswork and crop loss by providing instant, personalized, and AI-driven farming assistance.**
 💡 Proposed Solution
 
 This system provides:
@@ -25,25 +23,25 @@ Reminder system for fertilizer and pesticide schedules
 
 🧩 Features
 
-🌿 Leaf Disease Detection
+🌿 **Leaf Disease Detection**
 Upload a leaf image to identify diseases and get chemical & organic treatment suggestions.
 
-🌱 Soil Result Analyzer
+🌱**Soil Result Analyzer**
 Upload soil test reports to get crop recommendations and soil improvement tips.
 
-🌾 Seed Name Detection
+🌾 **Seed Name Detection**
 Identify seeds from images and get cultivation details.
 
-🌸 Garden Plant Care
+🌸 **Garden Plant Care**
 Enter plant name to receive planting, watering, sunlight, and manure guidance.
 
-☁️ Weather Forecast & Alerts
+☁️ **Weather Forecast & Alerts**
 View local weather and receive early alerts for floods or cyclones.
 
-⏰ Smart Reminders
+⏰ **Smart Reminders**
 Get notified about fertilizer and pesticide application schedules.
 
-🛠️ Technologies Used
+🛠️**Technologies Used**
 Frontend
 
 HTML
@@ -115,19 +113,3 @@ IoT sensor integration (soil moisture, temperature)
 Market price prediction
 
 Multi-language support
-
-👨‍💻 Developed By
-
-Team / Student Name
-MANGALASHERY
-NIVEDH P
-ADWAITH U
-ANIRUDH KESAV A S
-AARON JOSEPH
-PRATIK KALYAN INGAWALE
-
-Hackathon / Institution Name
-
-📜 License
-
-This project is developed for educational and hackathon purposes.
