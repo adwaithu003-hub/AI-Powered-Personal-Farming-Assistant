@@ -1,5 +1,5 @@
 
-export type AppView = 'home' | 'history' | 'account' | 'garden-care' | 'soil-analyzer' | 'seed-detector' | 'reminders';
+export type AppView = 'home' | 'history' | 'account' | 'garden-care' | 'soil-analyzer' | 'reminders' | 'seed-detector' | 'weather' | 'nutrient-analyzer';
 
 export interface User {
   name: string;
@@ -34,7 +34,23 @@ export interface PurchaseLink {
   url: string;
 }
 
-export type HistoryItemType = 'analysis' | 'guide' | 'soil-analysis' | 'seed-analysis';
+export interface SeedData {
+  seedName: string;
+  plantName: string;
+  description: string;
+  cultivationPlaces: string[];
+  bestSoil: string;
+  growthTips: string[];
+}
+
+export interface NutrientData {
+  healthScore: number;
+  deficiencies: string[];
+  symptoms: string[];
+  recommendations: string[];
+}
+
+export type HistoryItemType = 'analysis' | 'guide' | 'soil-analysis' | 'seed-analysis' | 'nutrient-analysis';
 
 export interface HistoryItem {
   id: string;
@@ -65,14 +81,9 @@ export interface HistoryItem {
     improvementTips: string[];
   };
   // Fields for 'seed-analysis' type
-  seedData?: {
-    seedName: string;
-    plantName: string;
-    description: string;
-    cultivationPlaces: string[];
-    bestSoil: string;
-    growthTips: string[];
-  };
+  seedData?: SeedData;
+  // Fields for 'nutrient-analysis' type
+  nutrientData?: NutrientData;
 }
 
 export interface GardenPlant {

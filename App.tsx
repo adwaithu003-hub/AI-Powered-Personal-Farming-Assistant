@@ -6,7 +6,8 @@ import ChatWindow from './components/ChatWindow';
 import Sidebar from './components/Sidebar';
 import GardenCare from './components/GardenCare';
 import SoilAnalyzer from './components/SoilAnalyzer';
-import SeedDetector from './components/SeedDetector';
+import NutrientAnalyzer from './components/NutrientAnalyzer';
+import Weather from './components/Weather';
 import Reminders from './components/Reminders';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -236,15 +237,16 @@ const App: React.FC = () => {
                   setView('home');
                 } else if (item.type === 'soil-analysis') { setSelectedHistoryItem(item); setView('soil-analyzer');
                 } else if (item.type === 'seed-analysis') { setSelectedHistoryItem(item); setView('seed-detector');
+                } else if (item.type === 'nutrient-analysis') { setSelectedHistoryItem(item); setView('nutrient-analyzer');
                 } else { setMessages([{ role: 'model', text: item.guideContent || "" }]); setView('garden-care'); }
               }}
             >
               <div className="h-44 bg-slate-50 relative overflow-hidden">
-                {item.imageUrl ? <img src={`data:image/jpeg;base64,${item.imageUrl}`} className="w-full h-full object-cover transition-transform group-hover:scale-110" alt={item.plantName} /> : <div className="w-full h-full flex flex-col items-center justify-center text-slate-300 space-y-2"><span className="text-4xl">{item.type === 'guide' ? '🪴' : item.type === 'soil-analysis' ? '🔬' : item.type === 'seed-analysis' ? '🌱' : '🔬'}</span></div>}
-                <div className="absolute top-4 left-4"><span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg ${item.type === 'analysis' ? 'bg-blue-600 text-white' : item.type === 'soil-analysis' ? 'bg-amber-600 text-white' : item.type === 'seed-analysis' ? 'bg-emerald-800 text-white' : 'bg-emerald-600 text-white'}`}>{item.type.replace('-', ' ')}</span></div>
+                {item.imageUrl ? <img src={`data:image/jpeg;base64,${item.imageUrl}`} className="w-full h-full object-cover transition-transform group-hover:scale-110" alt={item.plantName} /> : <div className="w-full h-full flex flex-col items-center justify-center text-slate-300 space-y-2"><span className="text-4xl">{item.type === 'guide' ? '🪴' : item.type === 'soil-analysis' ? '🔬' : item.type === 'seed-analysis' ? '🌱' : item.type === 'nutrient-analysis' ? '⚡' : '🔬'}</span></div>}
+                <div className="absolute top-4 left-4"><span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg ${item.type === 'analysis' ? 'bg-blue-600 text-white' : item.type === 'soil-analysis' ? 'bg-amber-600 text-white' : item.type === 'seed-analysis' ? 'bg-emerald-800 text-white' : item.type === 'nutrient-analysis' ? 'bg-purple-600 text-white' : 'bg-emerald-600 text-white'}`}>{item.type.replace('-', ' ')}</span></div>
               </div>
               <div className="p-6 flex-1 flex flex-col">
-                <div className="mb-4"><p className="text-[10px] font-black text-emerald-600 uppercase tracking-widest">{item.plantName}</p><h3 className="font-black text-slate-900 mt-1 line-clamp-1">{item.type === 'analysis' ? item.diseaseName : item.type === 'soil-analysis' ? `Soil Health: pH ${item.soilData?.phValue}` : item.type === 'seed-analysis' ? `Seed: ${item.seedData?.seedName}` : `Care Guide: ${item.plantName}`}</h3></div>
+                <div className="mb-4"><p className="text-[10px] font-black text-emerald-600 uppercase tracking-widest">{item.plantName}</p><h3 className="font-black text-slate-900 mt-1 line-clamp-1">{item.type === 'analysis' ? item.diseaseName : item.type === 'soil-analysis' ? `Soil Health: pH ${item.soilData?.phValue}` : item.type === 'seed-analysis' ? `Seed: ${item.seedData?.seedName}` : item.type === 'nutrient-analysis' ? `Health Score: ${item.nutrientData?.healthScore}/100` : `Care Guide: ${item.plantName}`}</h3></div>
                 <div className="mt-auto flex items-center justify-between"><span className="text-[10px] font-bold text-slate-400">{new Date(item.timestamp).toLocaleDateString()}</span><div className="flex items-center text-[10px] font-black text-emerald-600 uppercase tracking-widest group-hover:translate-x-1 transition-transform"><span>View Result</span><svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7 7" /></svg></div></div>
               </div>
             </div>
@@ -281,6 +283,8 @@ const App: React.FC = () => {
           {view === 'garden-care' && <GardenCare onAddToHistory={saveToHistory} initialMessages={messages} />}
           {view === 'soil-analyzer' && <SoilAnalyzer onAddToHistory={saveToHistory} initialData={selectedHistoryItem} />}
           {view === 'seed-detector' && <SeedDetector onAddToHistory={saveToHistory} initialData={selectedHistoryItem} />}
+          {view === 'nutrient-analyzer' && <NutrientAnalyzer onAddToHistory={saveToHistory} initialData={selectedHistoryItem} />}
+          {view === 'weather' && <Weather />}
           {view === 'reminders' && <Reminders reminders={reminders} onAddReminder={handleAddReminder} onToggleReminder={handleToggleReminder} onDeleteReminder={handleDeleteReminder} />}
           {view === 'history' && renderHistory()}
           {view === 'account' && renderAccount()}
