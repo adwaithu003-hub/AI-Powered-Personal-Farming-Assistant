@@ -1,20 +1,18 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+An intelligent AI-powered web application that helps farmers and users detect plant diseases, identify nutrient deficiencies, analyze soil conditions, and monitor real-time weather to improve crop health and productivity.
 
-# Run and deploy your AI Studio app
-
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/64844a56-a4e1-480e-b1a8-a6fc93e02fe5
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+🚀 Features
+🌱 Plant Disease Detection using leaf image analysis
+🧪 Nutrient Deficiency Identification (N, P, K, etc.)
+🌍 Real-Time Weather Monitoring with alerts (cyclone, flood, heavy rain)
+🧾 Soil Analysis Module (pH, NPK evaluation)
+📊 Plant Health Score (0–100)
+🤖 AI Agronomist Chatbot for recommendations
+💻 User-Friendly Web Interface
+🛠️ Tech Stack
+Frontend: React.js, TypeScript, Tailwind CSS
+Build Tool: Vite
+AI Integration: Google Gemini API
+Libraries:
+React Markdown
+Remark-GFM
+Environment: Node.js
