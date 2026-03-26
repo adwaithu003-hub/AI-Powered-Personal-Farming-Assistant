@@ -16,13 +16,3 @@ Libraries:
 React Markdown
 Remark-GFM
 Environment: Node.js
-├── index.html
-├── package.json
-├── metadata.json
-├── README.md
-├── .env.local
-└── src/
-    ├── components/
-    ├── pages/
-    ├── App.tsx
-    └── index.tsx
