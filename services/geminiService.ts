@@ -37,11 +37,6 @@ Analyze images of soil reports. Return the data strictly in JSON format matching
 IMPORTANT: All fields are required. If a value is unknown, use "N/A" for strings and an empty array [] for arrays. 
 Do not include any conversational text outside the JSON block.`;
 
-const SEED_ANALYSER_INSTRUCTION = `You are an expert Botanist. 
-Analyze images of seeds. Return the data strictly in JSON format matching the schema.
-IMPORTANT: All fields are required.
-Do not include any conversational text outside the JSON block.`;
-
 const NUTRIENT_ANALYSER_INSTRUCTION = `You are an expert Plant Physiologist. 
 Analyze the plant image for nutrient deficiencies (Nitrogen, Phosphorus, Potassium, Calcium, Magnesium, etc.). 
 Estimate a health score from 0 to 100 based on visual vigor and color.
@@ -132,45 +127,6 @@ export const analyzeSoilReport = async (base64Image: string): Promise<HistoryIte
     return JSON.parse(text);
   } catch (err) {
     console.error("Failed to parse soil report:", text);
-    throw new Error("Invalid response format from AI");
-  }
-};
-
-export const analyzeSeedImage = async (base64Image: string): Promise<HistoryItem['seedData']> => {
-  const model = 'gemini-3-flash-preview';
-  const prompt = `Analyze this seed image. Identify the seed name, the plant it grows into, giving a description, list cultivation places (regions/countries), best soil type, and sowing/growth tips.
-
-Return data strictly in this JSON format:
-{
-  "seedName": string,
-  "plantName": string,
-  "description": string,
-  "cultivationPlaces": string[],
-  "bestSoil": string,
-  "growthTips": string[]
-}`;
-
-  const response = await ai.models.generateContent({
-    model,
-    contents: {
-      parts: [
-        { inlineData: { mimeType: 'image/jpeg', data: base64Image } },
-        { text: prompt }
-      ]
-    },
-    config: {
-      systemInstruction: SEED_ANALYSER_INSTRUCTION,
-      responseMimeType: "application/json"
-    }
-  });
-
-  const text = response.text;
-  if (!text) throw new Error("No response from AI");
-  
-  try {
-    return JSON.parse(text);
-  } catch (err) {
-    console.error("Failed to parse seed report:", text);
     throw new Error("Invalid response format from AI");
   }
 };
@@ -300,7 +256,7 @@ export const chatWithSoilExpert = async (history: { role: 'user' | 'model', text
   return response.text;
 };
 
-export const translateText = async (text: string, targetLanguage: 'Hindi' | 'Malayalam') => {
+export const translateText = async (text: string, targetLanguage: 'Hindi' | 'Malayalam' | 'Tamil') => {
   const model = 'gemini-3-flash-preview';
   const prompt = `Translate the following text into ${targetLanguage}. MAINTAIN ALL MARKDOWN FORMATTING. Do not add JSON or code brackets. Original text: "${text}"`;
   

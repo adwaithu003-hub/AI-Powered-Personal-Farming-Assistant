@@ -107,13 +107,13 @@ const SoilAnalyzer: React.FC<SoilAnalyzerProps> = ({ onAddToHistory, initialData
     }
   };
 
-  const handleTranslate = async (index: number, lang: 'hi' | 'ml') => {
+  const handleTranslate = async (index: number, lang: 'hi' | 'ml' | 'ta') => {
     const msg = chatMessages[index];
     if (msg.translations?.[lang]) return;
 
     setTranslatingIndex(index);
     try {
-      const targetLang = lang === 'hi' ? 'Hindi' : 'Malayalam';
+      const targetLang = lang === 'hi' ? 'Hindi' : lang === 'ml' ? 'Malayalam' : 'Tamil';
       const translated = await translateText(msg.text, targetLang);
       if (translated) {
         const updatedMessages = [...chatMessages];
@@ -302,6 +302,12 @@ const SoilAnalyzer: React.FC<SoilAnalyzerProps> = ({ onAddToHistory, initialData
                             <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.translations.ml}</ReactMarkdown>
                           </div>
                         )}
+                        {msg.translations?.ta && (
+                          <div className="mt-4 pt-4 border-t border-white/10 opacity-70 italic">
+                            <p className="text-[10px] font-black uppercase text-amber-400 mb-1">Tamil Translation</p>
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.translations.ta}</ReactMarkdown>
+                          </div>
+                        )}
                       </div>
                     </div>
                     
@@ -320,6 +326,13 @@ const SoilAnalyzer: React.FC<SoilAnalyzerProps> = ({ onAddToHistory, initialData
                           className={`text-[9px] font-black uppercase tracking-widest px-2 py-1 rounded bg-slate-800 border border-white/5 hover:bg-slate-700 transition-all ${msg.translations?.ml ? 'text-amber-400 border-amber-500/30' : 'text-slate-400'}`}
                         >
                           {translatingIndex === i ? '...' : msg.translations?.ml ? 'Malayalam ✓' : 'Translate to Malayalam'}
+                        </button>
+                        <button 
+                          onClick={() => handleTranslate(i, 'ta')}
+                          disabled={translatingIndex === i}
+                          className={`text-[9px] font-black uppercase tracking-widest px-2 py-1 rounded bg-slate-800 border border-white/5 hover:bg-slate-700 transition-all ${msg.translations?.ta ? 'text-amber-400 border-amber-500/30' : 'text-slate-400'}`}
+                        >
+                          {translatingIndex === i ? '...' : msg.translations?.ta ? 'Tamil ✓' : 'Translate to Tamil'}
                         </button>
                       </div>
                     )}

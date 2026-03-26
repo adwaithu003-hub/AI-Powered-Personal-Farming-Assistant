@@ -52,14 +52,14 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, onSendMessage, onImag
     fileInputRef.current?.click();
   };
 
-  const handleTranslate = async (index: number, lang: 'hi' | 'ml') => {
+  const handleTranslate = async (index: number, lang: 'hi' | 'ml' | 'ta') => {
     const msg = messages[index];
     setActiveLangMenu(null);
     if (msg.translations?.[lang]) return;
 
     setTranslatingIndex(index);
     try {
-      const targetLang = lang === 'hi' ? 'Hindi' : 'Malayalam';
+      const targetLang = lang === 'hi' ? 'Hindi' : lang === 'ml' ? 'Malayalam' : 'Tamil';
       const translated = await translateText(msg.text, targetLang);
       if (translated && onUpdateMessage) {
         const updatedMsg = {
@@ -147,6 +147,12 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, onSendMessage, onImag
                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.translations.ml}</ReactMarkdown>
                         </div>
                       )}
+                      {msg.translations?.ta && (
+                        <div className="mt-4 pt-4 border-t border-slate-100 italic text-slate-500">
+                           <p className="text-[10px] font-black uppercase text-emerald-600 mb-1">Tamil Translation</p>
+                           <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.translations.ta}</ReactMarkdown>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -183,6 +189,12 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, onSendMessage, onImag
                         className={`w-full text-left px-4 py-2.5 text-[10px] font-bold uppercase tracking-widest rounded-xl transition-all ${msg.translations?.ml ? 'bg-emerald-50 text-emerald-600' : 'text-slate-600 hover:bg-slate-50'}`}
                       >
                         Malayalam {msg.translations?.ml ? '✓' : ''}
+                      </button>
+                      <button 
+                        onClick={() => handleTranslate(i, 'ta')}
+                        className={`w-full text-left px-4 py-2.5 text-[10px] font-bold uppercase tracking-widest rounded-xl transition-all ${msg.translations?.ta ? 'bg-emerald-50 text-emerald-600' : 'text-slate-600 hover:bg-slate-50'}`}
+                      >
+                        Tamil {msg.translations?.ta ? '✓' : ''}
                       </button>
                     </div>
                   </div>
